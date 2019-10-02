@@ -46,6 +46,7 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
+  word-wrap: break-word;
 }
 
 /* Text Styles*/
