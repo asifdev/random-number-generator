@@ -42,11 +42,15 @@ class App extends Component {
     //   return array;
 
     this.setState({
-      numArray: array.join(",")
+      numArray: array
     });
   };
-
   render() {
+    const listItems = this.state.numArray.map(number => (
+      <li className="box" key={number}>
+        {number}
+      </li>
+    ));
     return (
       <div className="App">
         <NavBar />
@@ -55,7 +59,9 @@ class App extends Component {
           numberShuffle={this.suffle}
           clearBoard={this.clear}
         />
-        <div className="container">{this.state.numArray}</div>
+        <div className="container">
+          <ul className="wrapper">{listItems}</ul>
+        </div>
       </div>
     );
   }
