@@ -21,12 +21,28 @@ class App extends Component {
 
   suffle = () => {
     console.log("Suffled");
-    let initArray = [];
-    for (let i = 1; i <= 100; i++) {
-      initArray.push(i);
+    let array = [];
+    for (let i = 1; i <= 10000; i++) {
+      array.push(i);
     }
+
+    var i = array.length,
+      j = 0,
+      temp;
+
+    while (i--) {
+      j = Math.floor(Math.random() * (i + 1));
+
+      // swap randomly chosen element with current element
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+
+    //   return array;
+
     this.setState({
-      numArray: initArray
+      numArray: array.join(",")
     });
   };
 
