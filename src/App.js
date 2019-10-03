@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import NavBar from "./layout/Navigation";
 import Generator from "./generator/Generator";
+import { FixedSizeList as List } from "react-window";
 
 // import PropTypes from "prop-types";
 
@@ -46,11 +47,32 @@ class App extends Component {
     });
   };
   render() {
-    const listItems = this.state.numArray.map(number => (
-      <li className="box" key={number}>
-        {number}
-      </li>
-    ));
+    // const listItems = this.state.numArray.map(number => (
+    //   <li className="box" key={number}>
+    //     {number}
+    //   </li>
+    // ));
+
+    const listItems = this.state.numArray;
+
+    const Row = ({ index, style }) => (
+      <div className={index % 2 ? "ListItemOdd" : "ListItemEven"} style={style}>
+        {listItems[index]}
+      </div>
+    );
+
+    const Example = () => (
+      <List
+        className="wrapper"
+        height={1500}
+        itemCount={this.state.numArray.length}
+        itemSize={35}
+        width={600}
+      >
+        {Row}
+      </List>
+    );
+
     return (
       <div className="App">
         <NavBar />
@@ -60,7 +82,8 @@ class App extends Component {
           clearBoard={this.clear}
         />
         <div className="container">
-          <ul className="wrapper">{listItems}</ul>
+          {/* <ul className="wrapper">{listItems}</ul> */}
+          <Example />
         </div>
       </div>
     );
