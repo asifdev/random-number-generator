@@ -12,7 +12,8 @@ Node + npm : https://nodejs.org/en/
 
 ### `npm install`
 
-Using terminal `cd` (Change directory) into the downloaded folder and run `npm install`. It will download all the required libraries. <br>You <i>have<i> to be inside the project root folder.
+- Using terminal `cd` (Change directory) into the downloaded folder
+- Run `npm install`. It will download all the required libraries. <br><br> P.S - You <i>have<i> to be inside the project root folder where `package.json` file exists.
 
 ### `npm start`
 
