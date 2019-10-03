@@ -1,34 +1,35 @@
 import React, { Component } from "react";
-import "./App.css";
+import { FixedSizeList as List } from "react-window";
+
 import NavBar from "./layout/Navigation";
 import Generator from "./generator/Generator";
 
-// import PropTypes from "prop-types";
+import "./App.css";
 
 class App extends Component {
-  // static propTypes = {
-  //   suffle: PropTypes.func.isRequired
-  // };
+  //Initial state
   state = {
     numArray: []
   };
 
+  //Clears the generated number
   clear = () => {
     this.setState({
       numArray: []
     });
   };
 
-  suffle = () => {
-    console.log("Suffled");
+  //Generates random unique numbers between 1 - 10,000
+  generateNumber = () => {
+    let j = 0;
+    let temp;
+
     let array = [];
     for (let i = 1; i <= 10000; i++) {
       array.push(i);
     }
 
-    var i = array.length,
-      j = 0,
-      temp;
+    let i = array.length;
 
     while (i--) {
       j = Math.floor(Math.random() * (i + 1));
@@ -39,31 +40,53 @@ class App extends Component {
       array[j] = temp;
     }
 
-    //   return array;
-
     this.setState({
-      numArray: array.join(",")
+      numArray: array
     });
   };
 
   render() {
+    const { numArray } = this.state;
+
+    //Set the Styling
+    const Row = ({ index, style }) => (
+      <div className={index % 2 ? "ListItemOdd" : "ListItemEven"} style={style}>
+        {numArray[index]}
+      </div>
+    );
+
+    //Set the data into list
+    const NumberList = () => (
+      <List
+        className="wrapper"
+        height={1500}
+        itemCount={numArray.length}
+        itemSize={35}
+        width={600}
+      >
+        {Row}
+      </List>
+    );
+
     return (
       <div className="App">
         <NavBar />
         <Generator
           style={userStyle}
-          numberShuffle={this.suffle}
           clearBoard={this.clear}
+          numberShuffle={this.generateNumber}
         />
-        <div className="container">{this.state.numArray}</div>
+        <div className="container">
+          <NumberList />
+        </div>
       </div>
     );
   }
 }
 
 const userStyle = {
-  display: "flex",
   alignItems: "center",
+  display: "flex",
   justifyContent: "center"
 };
 
