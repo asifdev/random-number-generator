@@ -8,18 +8,14 @@ class Generator extends Component {
   };
 
   render() {
+    const { numberShuffle, clearBoard } = this.props;
+
     return (
       <div className="card" style={userStyle}>
-        <button
-          className="btn btn-sm btn-primary"
-          onClick={this.props.numberShuffle}
-        >
+        <button className="btn btn-primary" onClick={numberShuffle}>
           Generate
         </button>
-        <button
-          className="btn btn-sm btn-primary"
-          onClick={this.props.clearBoard}
-        >
+        <button className="btn btn-primary" onClick={clearBoard}>
           Clear
         </button>
       </div>
